@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dating App</title>
+  <style>
+   
+   body {
+
+  font-family: 'Inter', sans-serif;
+  background: url('1602014030-GettyImages-581033659.jpg') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  font-size: 5rem;
+  align-items: center;
+  height: 100vh;
+  overflow: auto;
+}
+    .container {
+    
+      background: white;
+      padding: 20px;
+      border-style:solid ;
+      border-color:black;
+      border-radius: 30px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      width: 360px;
+      max-height: 90vh;
+      overflow-y: auto;
+      text-align: center;
+      animation: slideIn 0.5s ease-in-out;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h1 {
+      color: #413438;
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+    h2 {
+      color: #333;
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+    input[type="text"], input[type="password"], input[type="email"] {
+      width: 90%;
+      border-style:solid;
+      border-color:black;
+
+      padding: 12px;
+      margin: 8px auto;
+      
+      border-radius: 10px;
+      font-size: 1rem;
+      background: #f9f9f9;
+      transition: border-color 0.3s ease;
+    }
+    input:focus {
+      outline: none;
+      border-color: #30292c;
+    }
+    .remember {
+      text-align: left;
+      width: 90%;
+      margin: 5px auto;
+      font-size: 0.9rem;
+      color: #555;
+    }
+    button {
+      width: 95%;
+      padding: 12px;
+      margin: 10px 0;
+      border: solid;
+      border-color:black;
+      border-radius: 30px;
+      background: linear-gradient(90deg, #e91e63, #f06292);
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(233, 30, 99, 0.3);
+    }
+    .link {
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+    .link a {
+      color: #e91e63;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .link a:hover {
+      text-decoration: underline;
+    }
+    .hidden {
+      display: none;
+    }
+    .profile-section {
+      
+
+      background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+    .profile-section img {  
+      justify-content: center;
+      width: 250px;
+      height: 250px;
+  
+     
+
+      object-fit:cover;
+      margin-bottom: 10px;
+      border: 3px solid #fff;
+    }
+    .profile-section h2 {
+      font-size: 1.5rem;
+      color: #333;
+      margin: 10px 0;
+    }
+    .profile-info {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 10px;
+    } 
+    .profile-info p {
+      margin: 5px 0;
+    }
+    .interaction-counts {
+      border: solid;
+      display: flex;
+      justify-content: space-around;
+      font-size: 30px;
+      color: #333;
+      background: #05d8bc;
+      padding: 10px;
+      border-radius: 20x;
+      margin-top: 10px;
+    }
+    .partners-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin: 20px 0;
+    }
+    .partner-card {
+      background: #fff;
+      border-radius: 15px;
+      overflow: hidden;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .partner-card.hidden {
+      display: none;
+    }
+    .partner-card:hover {
+      transform: translateY(-5px);
+    }
+    .partner-card img {
+      
+      width: 100%;
+      height: 300px;
+      object-fit: cover;  
+    }
+    .partner-card p {
+       border-style:solid;
+      border-color:black;
+      margin: 20px 0;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #333;
+     
+    }
+    .partner-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+      gap: 5px;
+    }
+    .action-row {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      gap: 5px;
+    }
+    .action-row button {
+      padding: 8px;
+      font-size: 0.85rem;
+      margin: 0;
+    }
+    .action-row.nav-buttons button {
+      width: 48%;
+    }
+    .action-row.interaction-buttons button {
+      width: 32%;
+    }
+    .chat-btn {
+      background: linear-gradient(90deg, #4CAF50, #66BB6A);
+    }
+    .chat-btn:hover {
+      background: linear-gradient(90deg, #45a049, #5cb85c);
+      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+    }
+    .call-btn {
+      background: linear-gradient(90deg, #2196F3, #42A5F5);
+      
+    }
+    .call-btn:hover {
+      background: linear-gradient(90deg, #1e87db, #3b94d9);
+      box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+    }
+    .like-btn {
+      background: linear-gradient(90deg, #e91e63, #f06292);
+    }
+    .like-btn:hover {
+      background: linear-gradient(90deg, #d81b60, #ec407a);
+      box-shadow: 0 4px 12px rgba(233, 30, 99, 0.3);
+    }
+    .backward-btn {
+      background: linear-gradient(90deg, #757575, #9e9e9e);
+    }
+    .backward-btn:hover {
+      background: linear-gradient(90deg, #616161, #8d8d8d);
+      box-shadow: 0 4px 12px rgba(117, 117, 117, 0.3);
+    }
+    .skip-btn {
+      background: linear-gradient(90deg, #ff9800, #ffb300);
+    }
+    .skip-btn:hover {
+      background: linear-gradient(90deg, #fb8c00, #ffa000);
+      box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+    }
+    .chat-view {
+      position: fixed;
+      height: 150;
+      top: 50%;
+      left: 80%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      
+     
+      overflow-y: auto;
+      z-index: 1000;
+      text-align: center;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    .chat-view::before {
+     
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
+    .chat-view img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 50px;
+      margin-bottom: 50px;
+    }
+    .chat-box {
+     
+    
+      border-radius: 10px;
+      padding: 15px;
+      max-height: 200px;
+      overflow-y: auto;
+      margin-bottom: 15px;
+      text-align: left;
+      font-size: 0.9rem;
+      background: #f9f9f9;
+        border-style:solid;
+      border-color:black
+    }
+    .chat-box p {
+      margin: 8px 0;
+      padding: 8px;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+       border-style:solid;
+      border-color:black
+    }
+    .chat-input {
+      display: flex;
+      gap: 10px;
+    }
+    .chat-input input {
+      flex-grow: 1;
+      padding: 10px;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      background: #f9f9f9;
+       border-style:solid;
+      border-color:black
+    }
+    .chat-input button {
+      width: 80px;
+      padding: 10px;
+      font-size: 0.9rem;
+       border-style:solid;
+      border-color:black
+    }
+    .close-btn {
+      background: linear-gradient(90deg, #ff5252, #ef5350);
+      width: 95%;
+      margin-top: 10px;
+    }
+    .close-btn:hover {
+      background: linear-gradient(90deg, #e53935, #d81b60);
+      box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+    }
+    .call-view {
+      text-align:right;
+    }
+    .call-view img {
+      position: fixed;
+      top: 50%;
+      right: 55%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      width: 320px;
+      max-height: 80vh;
+      overflow-y: auto;
+      z-index: 1000;
+      text-align: right;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    @keyframes ring {
+      0% { box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.7); }
+      50% { box-shadow: 0 0 0 12px rgba(33, 150, 243, 0.3); }
+      100% { box-shadow: 0 0 0 0 rgba(33, 150, 243, 0); }
+    }
+    .ringing {
+      top :50%;
+      right:55%;
+      animation: ring 1.5s infinite;
+    }
+    .age-verification {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      width: 300px;
+      text-align: center;
+      z-index: 1000;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    .age-verification::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
+    .age-verification h2 {
+      font-size: 1.5rem;
+      color: #161415;
+      margin-bottom: 15px;
+    }
+    .age-verification p {
+      font-size: 1rem;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .age-verification button {
+      width: 45%;
+      margin: 5px;
+    }
+    
+    .age-verification .yes-btn {
+      
+  
+      background: linear-gradient(90deg, #4CAF50, #66BB6A);
+       border-radius: 10px;
+       border-width: 10px; 
+       border-style: solid;   
+      }
+    .age-verification .yes-btn:hover {
+      background: linear-gradient(90deg, #45a049, #5cb85c);
+      box-shadow: 10 4px 12px rgba(76, 175, 80, 0.3);
+    }
+    .age-verification .no-btn {
+      background: linear-gradient(90deg, #352e2e, #ef5350);
+        border-radius: 10px;
+       border-width: 10px; 
+       border-style: solid;  
+    }
+    .age-verification .no-btn:hover {
+      background: linear-gradient(90deg, #2f2e3a, #292124);
+      
+      box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+      border-radius: 10px;
+       border-width: 10px; 
+       border-style: solid;   
+    }
+
+.photo-upload label {
+  width: 100%;
+  padding: 10px;
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: 800;
+  display: block;
+  margin-bottom: 5px;
+ 
+}
+.photo-upload input[type="file"] {
+height: 100px;
+  width: 100%;
+  padding: 100px;
+  font-size: 10.rem;
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  cursor: pointer;
+  
+}
+.photo-upload input[type="file"]:focus {
+  
+  outline: none;
+  border-color: #30292c;
+}
+
+.photo-upload img#photo-preview {
+  
+ height: fit-content;
+  max-width: 100px;
+  margin-top:110px;
+  border-radius: 10px;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+ 
+
+
+}
+
+     .update-photo-btn:hover {
+      
+      background: linear-gradient(90deg, #45a049, #5cb85c);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+  .photo-upload input[type="file"] {
+
+         background: linear-gradient(90deg, #45a049, #5cb85c);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+      content: center;
+
+      text-align: center;
+      display: none;
+  }
+
+    </style>
+</head>
+<body>
+  <!-- AGE VERIFICATION MODAL -->
+  <div class="age-verification" id="age-verification">
+    <h2>Age Verification</h2>
+    <h1>Are you 18 years old or above?</h1>
+    <button class="yes-btn" onclick="verifyAge(true)">Yes</button>
+    <button class="no-btn" onclick="verifyAge(false)">No</button>
+  </div>
+  <!-- LOGIN FORM -->
+  <div class="container hidden" id="login-box">
+    <h1>❤️ Dating App</h1>
+    <h2>Login to Your Account</h2>
+    <input type="text" placeholder="Username, Email, or Phone" id="username">
+    <input type="password" placeholder="Password" id="password">
+    <div class="remember">
+      <input type="checkbox" id="remember"> Remember Me
+    </div>
+    <button onclick="login()">Login</button>
+    <div class="link">
+      <a onclick="showForgot()">Forgot Password?</a>
+    </div>
+    <h2>Don't Have an Account?</h2>
+    <button onclick="showSignup()">Create Account</button>
+  </div>
+  <!-- SIGNUP FORM -->
+  <div class="container hidden" id="signup-box">
+    <h1>💘 Create Account</h1>
+    <input type="text" placeholder="Full Name" id="fullname">
+    <input type="text" placeholder="Username" id="new-username">
+    <input type="email" placeholder="Email" id="email">
+    <input type="password" placeholder="Password" id="new-password">
+    <div class="photo-upload">
+
+    <label for="profile-photo">Click here for your photos</label>
+    <img id="photo-preview" src="https://via.placeholder.com/100" alt="Preview">
+   
+    <input type="file" id="profile-photo" accept="image/*">
+   
+  </div>
+    <button onclick="signup()">Sign Up</button>
+    <div class="link">
+      <a onclick="showLogin()">Back to Login</a>
+    </div>
+  </div>
+  <!-- FORGOT PASSWORD FORM -->
+  <div class="container hidden" id="forgot-box">
+    <h1>🔑 Forgot Password</h1>
+    <input type="email" placeholder="Enter your email" id="reset-email">
+    <button onclick="resetPassword()">Reset Password</button>
+    <div class="link">
+      <a onclick="showLogin()">Back to Login</a>
+    </div>
+  </div>
+  <!-- PROFILE PAGE -->
+ <div class="container hidden" id="profile-box">
+    <div class="profile-section">
+      <img src="https://via.placeholder.com/100" alt="Profile Picture">
+      <div class="photo-upload">
+        
+        <input type="file" id="update-profile-photo" accept="image/*">
+        <button class="update-photo-btn" onclick="document.getElementById('update-profile-photo').click()">Update Photo</button>
+      </div>
+   
+
+   
+  <h2 id="profile-username">Username</h2>
+      <div class="profile-info">
+        <h2><p><strong>Full Name:</strong> <span id="profile-fullname"></span></p></h2>
+       <h2> <p><strong>Email:</strong> <span id="profile-email"></span></p></h2>
+      </div>
+      <div class="interaction-counts">
+        <p>Chats: <span id="chat-count">0</span></p>
+        <p>Calls: <span id="call-count">0</span></p>
+        <p>Likes: <span id="like-count">0</span></p>
+      </div>
+    </div>
+    <h2>Discover Matches</h2>
+    <div class="partners-grid" id="partners-grid">
+      <div class="partner-card" data-name="Jamie Smith">
+        <img src="download (6).jfif" alt="Partner 1">
+        <p>Jamie Smith, 28</p>
+        <div class="partner-actions">
+          <div class="action-row nav-buttons">
+            <button class="backward-btn" onclick="showPreviousPartner()">Backward</button>
+            <button class="skip-btn" onclick="showNextPartner()">Skip</button>
+          </div>
+          <div class="action-row interaction-buttons">
+            <button class="chat-btn" onclick="chat('Jamie Smith', 'download (6).jfif')">Chat</button>
+            <button class="call-btn" onclick="call('Jamie Smith', 'download (6).jfif')">Call</button>
+            <button class="like-btn" onclick="like('Jamie Smith')">Like</button>
+          </div>
+        </div>
+      </div>
+      <div class="partner-card hidden" data-name="Alex Johnson">
+        <img src="download (7).jfif" alt="Partner 2">
+        <p>Alex Johnson, 30</p>
+        <div class="partner-actions">
+          <div class="action-row nav-buttons">
+            <button class="backward-btn" onclick="showPreviousPartner()">Backward</button>
+            <button class="skip-btn" onclick="showNextPartner()">Skip</button>
+          </div>
+          <div class="action-row interaction-buttons">
+            <button class="chat-btn" onclick="chat('Alex Johnson', 'download (7).jfif')">Chat</button>
+            <button class="call-btn" onclick="call('Alex Johnson', 'download (7).jfif')">Call</button>
+            <button class="like-btn" onclick="like('Alex Johnson')">Like</button>
+          </div>
+        </div>
+      </div>
+      <div class="partner-card hidden" data-name="Taylor Lee">
+        <img src="download (5).jfif" alt="Partner 3">
+        <p>Taylor Lee, 25</p>
+        <div class="partner-actions">
+          <div class="action-row nav-buttons">
+            <button class="backward-btn" onclick="showPreviousPartner()">Backward</button>
+            <button class="skip-btn" onclick="showNextPartner()">Skip</button>
+          </div>
+          <div class="action-row interaction-buttons">
+            <button class="chat-btn" onclick="chat('Taylor Lee', 'download (5).jfif')">Chat</button>
+            <button class="call-btn" onclick="call('Taylor Lee', 'download (5).jfif')">Call</button>
+            <button class="like-btn" onclick="like('Taylor Lee')">Like</button>
+          </div>
+        </div>
+      </div>
+      <div class="partner-card hidden" data-name="Sam Carter">
+        <img src="download (4).jfif" alt="Partner 4">
+        <p>Sam Carter, 27</p>
+        <div class="partner-actions">
+          <div class="action-row nav-buttons">
+            <button class="backward-btn" onclick="showPreviousPartner()">Backward</button>
+            <button class="skip-btn" onclick="showNextPartner()">Skip</button>
+          </div>
+          <div class="action-row interaction-buttons">
+            <button class="chat-btn" onclick="chat('Sam Carter', 'download (4).jfif')">Chat</button>
+            <button class="call-btn" onclick="call('Sam Carter', 'download (4).jfif')">Call</button>
+            <button class="like-btn" onclick="like('Sam Carter')">Like</button>
+          </div>
+        </div>
+      </div>
+      <div class="partner-card hidden" data-name="Morgan Blake">
+        <img src="download (6).jfif" alt="Partner 5">
+        <p>Morgan Blake, 29</p>
+        <div class="partner-actions">
+          <div class="action-row nav-buttons">
+            <button class="backward-btn" onclick="showPreviousPartner()">Backward</button>
+            <button class="skip-btn" onclick="showNextPartner()">Skip</button>
+          </div>
+          <div class="action-row interaction-buttons">
+            <button class="chat-btn" onclick="chat('Morgan Blake', 'download (6).jfif')">Chat</button>
+            <button class="call-btn" onclick="call('Morgan Blake', 'download (6).jfif')">Call</button>
+            <button class="like-btn" onclick="like('Morgan Blake')">Like</button>
+          </div>
+        </div>
+      </div>
+      <div class="partner-card hidden" data-name="Riley Quinn">
+        <img src="download (7).jfif" alt="Partner 6">
+        <p>Riley Quinn, 26</p>
+        <div class="partner-actions">
+          <div class="action-row nav-buttons">
+            <button class="backward-btn" onclick="showPreviousPartner()">Backward</button>
+            <button class="skip-btn" onclick="showNextPartner()">Skip</button>
+          </div>
+          <div class="action-row interaction-buttons">
+            <button class="chat-btn" onclick="chat('Riley Quinn', 'download (7).jfif')">Chat</button>
+            <button class="call-btn" onclick="call('Riley Quinn', 'download (7).jfif')">Call</button>
+            <button class="like-btn" onclick="like('Riley Quinn')">Like</button>
+          </div>
+        </div>
+      </div>
+      <div class="partner-card hidden" data-name="Jordan Ellis">
+        <img src="download (5).jfif" alt="Partner 7">
+        <p>Jordan Ellis, 31</p>
+        <div class="partner-actions">
+          <div class="action-row nav-buttons">
+            <button class="backward-btn" onclick="showPreviousPartner()">Backward</button>
+            <button class="skip-btn" onclick="showNextPartner()">Skip</button>
+          </div>
+          <div class="action-row interaction-buttons">
+            <button class="chat-btn" onclick="chat('Jordan Ellis', 'download (5).jfif')">Chat</button>
+            <button class="call-btn" onclick="call('Jordan Ellis', 'download (5).jfif')">Call</button>
+            <button class="like-btn" onclick="like('Jordan Ellis')">Like</button>
+          </div>
+        </div>
+      </div>
+      <div class="partner-card hidden" data-name="Casey Parker">
+        <img src="download (4).jfif" alt="Partner 8">
+        <p>Casey Parker, 24</p>
+        <div class="partner-actions">
+          <div class="action-row nav-buttons">
+            <button class="backward-btn" onclick="showPreviousPartner()">Backward</button>
+            <button class="skip-btn" onclick="showNextPartner()">Skip</button>
+          </div>
+          <div class="action-row interaction-buttons">
+            <button class="chat-btn" onclick="chat('Casey Parker', 'download (4).jfif')">Chat</button>
+            <button class="call-btn" onclick="call('Casey Parker', 'download (4).jfif')">Call</button>
+            <button class="like-btn" onclick="like('Casey Parker')">Like</button>
+          </div>
+        </div>
+      </div>
+      <div class="partner-card hidden" data-name="Avery Brooks">
+        <img src="download (6).jfif" alt="Partner 9">
+        <p>Avery Brooks, 27</p>
+        <div class="partner-actions">
+          <div class="action-row nav-buttons">
+            <button class="backward-btn" onclick="showPreviousPartner()">Backward</button>
+            <button class="skip-btn" onclick="showNextPartner()">Skip</button>
+          </div>
+          <div class="action-row interaction-buttons">
+            <button class="chat-btn" onclick="chat('Avery Brooks', 'download (6).jfif')">Chat</button>
+            <button class="call-btn" onclick="call('Avery Brooks', 'download (6).jfif')">Call</button>
+            <button class="like-btn" onclick="like('Avery Brooks')">Like</button>
+          </div>
+        </div>
+      </div>
+      <div class="partner-card hidden" data-name="Skylar Reed">
+        <img src="download (7).jfif" alt="Partner 10">
+        <p>Skylar Reed, 32</p>
+        <div class="partner-actions">
+          <div class="action-row nav-buttons">
+            <button class="backward-btn" onclick="showPreviousPartner()">Backward</button>
+            <button class="skip-btn" onclick="showNextPartner()">Skip</button>
+          </div>
+          <div class="action-row interaction-buttons">
+            <button class="chat-btn" onclick="chat('Skylar Reed', 'download (7).jfif')">Chat</button>
+            <button class="call-btn" onclick="call('Skylar Reed', 'download (7).jfif')">Call</button>
+            <button class="like-btn" onclick="like('Skylar Reed')">Like</button>
+          </div>
+        </div>
+      </div>
+      <div class="partner-card hidden" data-name="Cameron Hayes">
+        <img src="download (5).jfif" alt="Partner 11">
+        <p>Cameron Hayes, 23</p>
+        <div class="partner-actions">
+          <div class="action-row nav-buttons">
+            <button class="backward-btn" onclick="showPreviousPartner()">Backward</button>
+            <button class="skip-btn" onclick="showNextPartner()">Skip</button>
+          </div>
+          <div class="action-row interaction-buttons">
+            <button class="chat-btn" onclick="chat('Cameron Hayes', 'download (5).jfif')">Chat</button>
+            <button class="call-btn" onclick="call('Cameron Hayes', 'download (5).jfif')">Call</button>
+            <button class="like-btn" onclick="like('Cameron Hayes')">Like</button>
+          </div>
+        </div>
+      </div>
+      <div class="partner-card hidden" data-name="Peyton Cole">
+        <img src="download (4).jfif" alt="Partner 12">
+        <p>Peyton Cole, 29</p>
+        <div class="partner-actions">
+          <div class="action-row nav-buttons">
+            <button class="backward-btn" onclick="showPreviousPartner()">Backward</button>
+            <button class="skip-btn" onclick="showNextPartner()">Skip</button>
+          </div>
+          <div class="action-row interaction-buttons">
+            <button class="chat-btn" onclick="chat('Peyton Cole', 'download (4).jfif')">Chat</button>
+            <button class="call-btn" onclick="call('Peyton Cole', 'download (4).jfif')">Call</button>
+            <button class="like-btn" onclick="like('Peyton Cole')">Like</button>
+          </div>
+        </div>
+      </div>
+      <div class="partner-card hidden" data-name="Emery Fox">
+        <img src="download (6).jfif" alt="Partner 13">
+        <p>Emery Fox, 26</p>
+        <div class="partner-actions">
+          <div class="action-row nav-buttons">
+            <button class="backward-btn" onclick="showPreviousPartner()">Backward</button>
+            <button class="skip-btn" onclick="showNextPartner()">Skip</button>
+          </div>
+          <div class="action-row interaction-buttons">
+            <button class="chat-btn" onclick="chat('Emery Fox', 'download (6).jfif')">Chat</button>
+            <button class="call-btn" onclick="call('Emery Fox', 'download (6).jfif')">Call</button>
+            <button class="like-btn" onclick="like('Emery Fox')">Like</button>
+          </div>
+        </div>
+      </div>
+      <div class="partner-card hidden" data-name="Rowan Miles">
+        <img src="download (7).jfif" alt="Partner 14">
+        <p>Rowan Miles, 30</p>
+        <div class="partner-actions">
+          <div class="action-row nav-buttons">
+            <button class="backward-btn" onclick="showPreviousPartner()">Backward</button>
+            <button class="skip-btn" onclick="showNextPartner()">Skip</button>
+          </div>
+          <div class="action-row interaction-buttons">
+            <button class="chat-btn" onclick="chat('Rowan Miles', 'download (7).jfif')">Chat</button>
+            <button class="call-btn" onclick="call('Rowan Miles', 'download (7).jfif')">Call</button>
+            <button class="like-btn" onclick="like('Rowan Miles')">Like</button>
+          </div>
+        </div>
+      </div>
+      <div class="partner-card hidden" data-name="Bailey Stone">
+        <img src="download (5).jfif" alt="Partner 15">
+        <p>Bailey Stone, 28</p>
+        <div class="partner-actions">
+          <div class="action-row nav-buttons">
+            <button class="backward-btn" onclick="showPreviousPartner()">Backward</button>
+            <button class="skip-btn" onclick="showNextPartner()">Skip</button>
+          </div>
+          <div class="action-row interaction-buttons">
+            <button class="chat-btn" onclick="chat('Bailey Stone', 'download (5).jfif')">Chat</button>
+            <button class="call-btn" onclick="call('Bailey Stone', 'download (5).jfif')">Call</button>
+            <button class="like-btn" onclick="like('Bailey Stone')">Like</button>
+          </div>
+        </div>
+      </div>
+      <div class="partner-card hidden" data-name="Logan West">
+        <img src="download (4).jfif" alt="Partner 16">
+        <p>Logan West, 25</p>
+        <div class="partner-actions">
+          <div class="action-row nav-buttons">
+            <button class="backward-btn" onclick="showPreviousPartner()">Backward</button>
+            <button class="skip-btn" onclick="showNextPartner()">Skip</button>
+          </div>
+          <div class="action-row interaction-buttons">
+            <button class="chat-btn" onclick="chat('Logan West', 'download (4).jfif')">Chat</button>
+            <button class="call-btn" onclick="call('Logan West', 'download (4).jfif')">Call</button>
+            <button class="like-btn" onclick="like('Logan West')">Like</button>
+          </div>
+        </div>
+      </div>
+      <div class="partner-card hidden" data-name="Sydney Hart">
+        <img src="download (6).jfif" alt="Partner 17">
+        <p>Sydney Hart, 27</p>
+        <div class="partner-actions">
+          <div class="action-row nav-buttons">
+            <button class="backward-btn" onclick="showPreviousPartner()">Backward</button>
+            <button class="skip-btn" onclick="showNextPartner()">Skip</button>
+          </div>
+          <div class="action-row interaction-buttons">
+            <button class="chat-btn" onclick="chat('Sydney Hart', 'download (6).jfif')">Chat</button>
+            <button class="call-btn" onclick="call('Sydney Hart', 'download (6).jfif')">Call</button>
+            <button class="like-btn" onclick="like('Sydney Hart')">Like</button>
+          </div>
+        </div>
+      </div>
+      <div class="partner-card hidden" data-name="Dakota Bell">
+        <img src="download (7).jfif" alt="Partner 18">
+        <p>Dakota Bell, 31</p>
+        <div class="partner-actions">
+          <div class="action-row nav-buttons">
+            <button class="backward-btn" onclick="showPreviousPartner()">Backward</button>
+            <button class="skip-btn" onclick="showNextPartner()">Skip</button>
+          </div>
+          <div class="action-row interaction-buttons">
+            <button class="chat-btn" onclick="chat('Dakota Bell', 'download (7).jfif')">Chat</button>
+            <button class="call-btn" onclick="call('Dakota Bell', 'download (7).jfif')">Call</button>
+            <button class="like-btn" onclick="like('Dakota Bell')">Like</button>
+          </div>
+        </div>
+      </div>
+      <div class="partner-card hidden" data-name="Finley Ross">
+        <img src="download (5).jfif" alt="Partner 19">
+        <p>Finley Ross, 24</p>
+        <div class="partner-actions">
+          <div class="action-row nav-buttons">
+            <button class="backward-btn" onclick="showPreviousPartner()">Backward</button>
+            <button class="skip-btn" onclick="showNextPartner()">Skip</button>
+          </div>
+          <div class="action-row interaction-buttons">
+            <button class="chat-btn" onclick="chat('Finley Ross', 'download (5).jfif')">Chat</button>
+            <button class="call-btn" onclick="call('Finley Ross', 'download (5).jfif')">Call</button>
+            <button class="like-btn" onclick="like('Finley Ross')">Like</button>
+          </div>
+        </div>
+      </div>
+      <div class="partner-card hidden" data-name="Harper Lane">
+        <img src="download (4).jfif" alt="Partner 20">
+        <p>Harper Lane, 29</p>
+        <div class="partner-actions">
+          <div class="action-row nav-buttons">
+            <button class="backward-btn" onclick="showPreviousPartner()">Backward</button>
+            <button class="skip-btn" onclick="showNextPartner()">Skip</button>
+          </div>
+          <div class="action-row interaction-buttons">
+            <button class="chat-btn" onclick="chat('Harper Lane', 'download (4).jfif')">Chat</button>
+            <button class="call-btn" onclick="call('Harper Lane', 'download (4).jfif')">Call</button>
+            <button class="like-btn" onclick="like('Harper Lane')">Like</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chat-view hidden" id="chat-view">
+      <img id="chat-image" src="" alt="Partner">
+      <h2 id="chat-partner"></h2>
+      <div class="chat-box" id="chat-box"></div>
+      <div class="chat-input">
+        <input type="text" id="chat-message" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+      </div>
+      <button class="close-btn" onclick="closeChat()">Close</button>
+    </div>
+    <div class="call-view hidden" id="call-view">
+      <img id="call-image" src="" alt="Partner" class="ringing">
+      <h2 id="call-partner"></h2>
+      <button onclick="endCall()">End Call</button>
+    </div>
+    <button onclick="logout()">Logout</button>
+  </div>
+  
+  <script>
+    const profilePhotoInput = document.getElementById('profile-photo');
+const photoPreview = document.getElementById('photo-preview');
+const updatePhotoInput = document.getElementById('update-profile-photo');
+const profileImg = document.querySelector('#profile-box .profile-section img');
+
+    const ageVerification = document.getElementById('age-verification');
+    const loginBox = document.getElementById('login-box');
+    const signupBox = document.getElementById('signup-box');
+    const forgotBox = document.getElementById('forgot-box');
+    const profileBox = document.getElementById('profile-box');
+    const partnersGrid = document.getElementById('partners-grid');
+    const chatView = document.getElementById('chat-view');
+    const callView = document.getElementById('call-view');
+    const chatImage = document.getElementById('chat-image');
+    const chatPartner = document.getElementById('chat-partner');
+    const chatBox = document.getElementById('chat-box');
+    const chatMessage = document.getElementById('chat-message');
+    const callImage = document.getElementById('call-image');
+    const callPartner = document.getElementById('call-partner');
+    let currentUser = null;
+    let currentChatPartner = null;
+    let currentCallPartner = null;
+    let currentPartnerIndex = 0;
+    let interactionDB = {
+      chats: {},
+      calls: {},
+      likes: {},
+      messages: {}
+    };
+
+    // AI Bot Responses
+    const botResponses = {
+      greetings: ['kupal!', 'tangina!', 'mama mo! papa mo blue'],
+      questions: ['sino kaba!', 'panget mo', 'luh papansin!'],
+      compliments: ['what you idiot', 'pautang!', 'nasan ka!'],
+      farewells: ['iloveyou', 'pogi ako?', 'sino kaba'],
+      default: ['wag kana nga mag chat!', 'bon burat!', 'gege']
+    };
+    
+
+    function getBotResponse(message) {
+      const msg = message.toLowerCase().trim();
+      if (['hi', 'hello', 'hey'].some(g => msg.includes(g))) {
+        return botResponses.greetings[Math.floor(Math.random() * botResponses.greetings.length)];
+      } else if (msg.includes('?')) {
+        return botResponses.questions[Math.floor(Math.random() * botResponses.questions.length)];
+      } else if (['nice', 'great', 'awesome', 'cute'].some(c => msg.includes(c))) {
+        return botResponses.compliments[Math.floor(Math.random() * botResponses.compliments.length)];
+      } else if (['bye', 'goodbye', 'see you'].some(f => msg.includes(f))) {
+        return botResponses.farewells[Math.floor(Math.random() * botResponses.farewells.length)];
+      } else {
+        return botResponses.default[Math.floor(Math.random() * botResponses.default.length)];
+      }
+    }
+
+profilePhotoInput.addEventListener('change', function () {
+  const file = this.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      photoPreview.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
+
+
+
+    
+    // Age Verification Logic
+    function verifyAge(isOver18) {
+      if (isOver18) {
+        ageVerification.classList.add('hidden');
+        loginBox.classList.remove('hidden');
+      } else {
+        ageVerification.innerHTML = `
+          <h2>Access Denied</h2>
+          <p>Sorry, you must be 18 years or older to use this app.</p>
+        `;
+      }
+    }
+
+    function showSignup() {
+      loginBox.classList.add('hidden');
+      signupBox.classList.remove('hidden');
+      forgotBox.classList.add('hidden');
+      profileBox.classList.add('hidden');
+    }
+
+    function showLogin() {
+      signupBox.classList.add('hidden');
+      loginBox.classList.remove('hidden');
+      forgotBox.classList.add('hidden');
+      profileBox.classList.add('hidden');
+    }
+
+    function showForgot() {
+      loginBox.classList.add('hidden');
+      signupBox.classList.add('hidden');
+      forgotBox.classList.remove('hidden');
+      profileBox.classList.add('hidden');
+    }
+
+    function showProfile() {
+      loginBox.classList.add('hidden');
+      signupBox.classList.add('hidden');
+      forgotBox.classList.add('hidden');
+      profileBox.classList.remove('hidden');
+      partnersGrid.classList.remove('hidden');
+      chatView.classList.add('hidden');
+      callView.classList.add('hidden');
+      updatePartnerDisplay();
+      updateInteractionCounts();
+    }
+
+    function login() {
+     const user = document.getElementById('username').value;
+  const pass = document.getElementById('password').value;
+  const remember = document.getElementById('remember').checked;
+
+  if (user && pass) {
+    const storedUser = localStorage.getItem('user_' + user);
+    if (storedUser) {
+      currentUser = JSON.parse(storedUser);
+      if (!currentUser.photo) {
+        alert("Please upload a profile photo in your account settings before logging in.");
+        showSignup();
+        return;
+      }
+      document.getElementById('profile-username').textContent = currentUser.username;
+      document.getElementById('profile-fullname').textContent = currentUser.fullname;
+      document.getElementById('profile-email').textContent = currentUser.email;
+      document.querySelector('.profile-section img').src = currentUser.photo;
+      if (remember) {
+        alert("Welcome back, " + user + "! (We’ll remember you next time)");
+      } else {
+        alert("Welcome back, " + user + "!");
+      }
+      showProfile();
+    } else {
+      alert("User not found. Please sign up.");
+    }
+  } else {
+    alert("Please enter username and password.");
+      }
+      
+    }
+    
+
+   function signup() {
+  const fullname = document.getElementById('fullname').value;
+  const user = document.getElementById('new-username').value;
+  const email = document.getElementById('email').value;
+  const pass = document.getElementById('new-password').value;
+  const photoInput = document.getElementById('profile-photo');
+  const photoFile = photoInput.files[0];
+
+  if (user && pass && fullname && email && photoFile) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      currentUser = {
+        username: user,
+        fullname: fullname,
+        email: email,
+        photo: e.target.result // Store photo as data URL
+      };
+      // Save user data to localStorage
+      localStorage.setItem('user_' + user, JSON.stringify(currentUser));
+      document.getElementById('profile-username').textContent = currentUser.username;
+      document.getElementById('profile-fullname').textContent = currentUser.fullname;
+      document.getElementById('profile-email').textContent = currentUser.email;
+      document.querySelector('.profile-section img').src = currentUser.photo;
+      alert("Account created for " + user + "!");
+      showProfile();
+    };
+    reader.readAsDataURL(photoFile);
+  } else {
+    alert("Please fill in all fields and upload a profile photo.");
+  }
+
+
+  document.getElementById('profile-photo').addEventListener('change', function(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const preview = document.getElementById('photo-preview');
+      preview.src = e.target.result;
+      preview.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
+
+
+
+
+
+
+    }
+
+    function resetPassword() {
+      const email = document.getElementById('reset-email').value;
+      if (email) {
+        alert("A password reset link has been sent to " + email);
+        showLogin();
+      } else {
+        alert("Please enter your email address.");
+      }
+    }
+
+    function logout() {
+      currentUser = null;
+      currentChatPartner = null;
+      currentCallPartner = null;
+      currentPartnerIndex = 0;
+      interactionDB = { chats: {}, calls: {}, likes: {}, messages: {} };
+      document.getElementById('username').value = '';
+      document.getElementById('password').value = '';
+      document.getElementById('remember').checked = false;
+      ageVerification.classList.remove('hidden');
+      ageVerification.innerHTML = `
+        <h2>Age Verification</h2>
+        <p>Are you 18 years old or above?</p>
+        <button class="yes-btn" onclick="verifyAge(true)">Yes</button>
+        <button class="no-btn" onclick="verifyAge(false)">No</button>
+      `;
+      showLogin();
+    }
+
+    function chat(name, imageSrc) {
+      if (currentUser) {
+        interactionDB.chats[name] = (interactionDB.chats[name] || 0) + 1;
+        currentChatPartner = name;
+        chatView.classList.remove('hidden');
+        callView.classList.add('hidden');
+        chatImage.src = imageSrc;
+        chatPartner.textContent = `Chatting with ${name}`;
+        updateChatBox();
+        updateInteractionCounts();
+      } else {
+        alert("Please log in to chat.");
+      }
+    }
+
+    function closeChat() {
+      currentChatPartner = null;
+      chatView.classList.add('hidden');
+      updateInteractionCounts();
+    }
+
+    function sendMessage() {
+      if (currentUser && currentChatPartner) {
+        const message = chatMessage.value.trim();
+        if (message) {
+          if (!interactionDB.messages[currentChatPartner]) {
+            interactionDB.messages[currentChatPartner] = [];
+          }
+          // Store user's message
+          interactionDB.messages[currentChatPartner].push({
+            sender: currentUser.username,
+            text: message,
+            timestamp: new Date().toLocaleTimeString()
+          });
+          // Generate and store bot response
+          const botResponse = getBotResponse(message);
+          interactionDB.messages[currentChatPartner].push({
+            sender: currentChatPartner,
+            text: botResponse,
+            timestamp: new Date().toLocaleTimeString()
+          });
+          chatMessage.value = '';
+          updateChatBox();
+        }
+      } else {
+        alert("Please log in and select a chat partner.");
+      }
+    }
+
+    function updateChatBox() {
+      chatBox.innerHTML = '';
+      if (currentChatPartner && interactionDB.messages[currentChatPartner]) {
+        interactionDB.messages[currentChatPartner].forEach(msg => {
+          const p = document.createElement('p');
+          p.textContent = `[${msg.timestamp}] ${msg.sender}: ${msg.text}`;
+          chatBox.appendChild(p);
+        });
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+    }
+
+    function call(name, imageSrc) {
+      if (currentUser) {
+        interactionDB.calls[name] = (interactionDB.calls[name] || 0) + 1;
+        currentCallPartner = name;
+        partnersGrid.classList.add('hidden');
+        chatView.classList.add('hidden');
+        callView.classList.remove('hidden');
+        callImage.src = imageSrc;
+        callPartner.textContent = `Calling ${name}`;
+        updateInteractionCounts();
+      } else {
+        alert("Please log in to make a call.");
+      }
+    }
+
+    function endCall() {
+      currentCallPartner = null;
+      showProfile();
+    }
+
+    function like(name) {
+      if (currentUser) {
+        interactionDB.likes[name] = (interactionDB.likes[name] || 0) + 1;
+        alert(`You liked ${name}!`);
+        updateInteractionCounts();
+      } else {
+        alert("Please log in to like.");
+      }
+    }
+
+    function updateInteractionCounts() {
+      const chatCount = Object.values(interactionDB.chats).reduce((sum, count) => sum + count, 0);
+      const callCount = Object.values(interactionDB.calls).reduce((sum, count) => sum + count, 0);
+      const likeCount = Object.values(interactionDB.likes).reduce((sum, count) => sum + count, 0);
+      document.getElementById('chat-count').textContent = chatCount;
+      document.getElementById('call-count').textContent = callCount;
+      document.getElementById('like-count').textContent = likeCount;
+    }
+
+    function showPreviousPartner() {
+      const partnerCards = document.querySelectorAll('.partner-card');
+      partnerCards[currentPartnerIndex].classList.add('hidden');
+      currentPartnerIndex = (currentPartnerIndex - 1 + partnerCards.length) % partnerCards.length;
+      partnerCards[currentPartnerIndex].classList.remove('hidden');
+    }
+
+    function showNextPartner() {
+      const partnerCards = document.querySelectorAll('.partner-card');
+      partnerCards[currentPartnerIndex].classList.add('hidden');
+      currentPartnerIndex = (currentPartnerIndex + 1) % partnerCards.length;
+      partnerCards[currentPartnerIndex].classList.remove('hidden');
+    }
+
+    function updatePartnerDisplay() {
+      const partnerCards = document.querySelectorAll('.partner-card');
+      partnerCards.forEach((card, index) => {
+        card.classList.toggle('hidden', index !== currentPartnerIndex);
+      });
+    }
+
+    // Initialize app with age verification
+    document.addEventListener('DOMContentLoaded', () => {
+      loginBox.classList.add('hidden');
+      signupBox.classList.add('hidden');
+      forgotBox.classList.add('hidden');
+      profileBox.classList.add('hidden');
+      ageVerification.classList.remove('hidden');
+    });
+
+
+    document.getElementById('update-profile-photo').addEventListener('change', function(event) {
+  const file = event.target.files[0];
+  if (file && currentUser) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      currentUser.photo = e.target.result;
+      document.querySelector('.profile-section img').src = currentUser.photo;
+      localStorage.setItem('user_' + currentUser.username, JSON.stringify(currentUser));
+      alert("Profile photo updated!");
+    };
+    reader.readAsDataURL(file);
+  }
+});
+  </script>
+
+
+
+
+
+
+</body>
+</html>
